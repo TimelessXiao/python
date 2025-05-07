@@ -64,3 +64,14 @@ def fun4(*args):
 
 fun4(1, 2, 3, 4)
 fun4(1, 1, 1)
+
+# 传递键值对
+print("-----" * 20)
+
+
+def fun5(**kwargs):
+    print(kwargs)
+
+
+fun5(a=1, b=2, c=3)
+fun5(name="张三", sex="女", hobby=["看电影", "看小说"])
