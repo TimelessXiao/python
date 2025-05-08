@@ -8,6 +8,11 @@
 # （5）查找联系人：如果通讯录不为空，用户根据提示输入联系人的姓名，若该联系人存在于通讯录中，则输出该联系人的所有信息，否则输出该联系人不在通讯录中的提示信息。如果通讯录为空，则会直接提示通讯录无信息。
 # （6）退出：退出手机通讯录。如果用户不主动选择退出，那么可以一直使用手机通讯录。
 # 本案例要求编写程序，实现具有如上功能的手机通讯录。
+def strip(**kwargs):
+    return {
+        k: v.strip() for k, v in kwargs.items()
+    }
+
 
 person_list = {
     '张三': {
@@ -27,6 +32,7 @@ person_list = {
     }
 
 }
+
 while True:
     i = input('''
     请选择以下功能：
@@ -42,6 +48,15 @@ while True:
         phone = input('请输入联系人手机号：')
         email = input('请输入联系人邮箱：')
         address = input('请输入联系人地址：')
+        x = {'name': name, 'phone': phone, 'email': email, 'address': address}
+        zhi = strip(**x)
+        name = zhi['name']
+        phone = zhi['phone']
+        email = zhi['email']
+        address = zhi['address']
+        if name == '' or phone == '' or email == '' or address == '':
+            print('请输入正确的信息！')
+            continue
         person_list[name] = {
             'phone': phone,
             'email': email,
@@ -58,17 +73,28 @@ while True:
         continue
     elif i == '3':
         name = input('请输入要删除的联系人姓名：')
-        if name in person_list:
+        name.strip()
+        if name in person_list.keys():
             del person_list[name]
             print('删除成功！')
         else:
             print('该联系人不在通讯录中！')
     elif i == '4':
         name = input('请输入要修改的联系人姓名：')
+        name.strip()
         if name in person_list:
             phone = input('请输入联系人手机号：')
             email = input('请输入联系人邮箱：')
             address = input('请输入联系人地址：')
+            x = {'phone': phone, 'email': email, 'address': address}
+            zhi = strip(**x)
+            phone = zhi['phone']
+            email = zhi['email']
+            address = zhi['address']
+            if phone == '' or email == '' or address == '':
+                print('请输入正确的信息！')
+            if name not in person_list.keys():
+                print('该联系人不在通讯录中！')
             person_list[name] = {
                 'phone': phone,
                 'email': email,
@@ -76,6 +102,7 @@ while True:
             }
     elif i == '5':
         name = input('请输入要查找的联系人姓名：')
+        name.strip()
         if name in person_list:
             print('姓名：%s 手机号：%s 邮箱：%s 地址：%s' % (name, person_list[name]['phone'], person_list[name]['email'],
                                                          person_list[name]['address']))
