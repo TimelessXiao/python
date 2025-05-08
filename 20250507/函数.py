@@ -23,7 +23,7 @@ def add(a, b):
     return a + b
 
 
-# 参数必须要传递，但是类型不限制
+# 参数 必须 要传递，但是类型不限制
 # 位置参数传递
 print(add(1, 2))
 print(add("a", "b"))
@@ -75,3 +75,9 @@ def fun5(**kwargs):
 
 fun5(a=1, b=2, c=3)
 fun5(name="张三", sex="女", hobby=["看电影", "看小说"])
+
+# 解包
+x = {"name": "张三", "sex": "女", "hobby": ["看电影", "看小说"]}
+fun5(**x)
+y = (1, 2, 3)
+fun4(*y)
